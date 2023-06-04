@@ -8,14 +8,23 @@ import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
 import { userWallet } from './services/SocialProtocolService';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Tasks from './pages/Tasks';
 
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export const App: FC = () => {
   return (
+
     <Context>
-      <Content />
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Content />} />
+        <Route path='/tasks' element={<Tasks />} />
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
+      </BrowserRouter>
     </Context>
   );
 };
@@ -189,5 +198,7 @@ const Content: FC = () => {
     </Container>
   )
 };
-
+const PageNotFound : FC = () =>{
+  return <Typography variant="h2" sx={{ color: 'white', fontSize: 20 }}>404 - NOT FOUND</Typography>
+}
 export default App;
