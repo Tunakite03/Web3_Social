@@ -8,14 +8,22 @@ import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
 import { userWallet } from './services/SocialProtocolService';
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CreateGroup from './pages/Group/CreateGroup'
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export const App: FC = () => {
   return (
     <Context>
-      <Content />
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Content />} />
+        {/* <Route path='/tasks' element={<Tasks />} />
+        <Route path='*' element={<PageNotFound />} /> */}
+        <Route path='/group' element={<CreateGroup />} />
+      </Routes>
+      </BrowserRouter>
     </Context>
   );
 };
@@ -38,8 +46,10 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>{children}</WalletModalProvider>
+      <WalletProvider wallets={wallets}>
+        <WalletModalProvider>
+          {children}
+        </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   );
