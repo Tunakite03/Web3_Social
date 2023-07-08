@@ -1,0 +1,112 @@
+{
+  "version": "0.1.0",
+  "name": "solana_twitter",
+  "instructions": [
+    {
+      "name": "createGoal",
+      "accounts": [
+        {
+          "name": "goal",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "createdPerson",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "updateGoal",
+      "accounts": [
+        {
+          "name": "goal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "createdPerson",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "tasks",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "deleteGoal",
+      "accounts": [
+        {
+          "name": "goal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "createdPerson",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Goal",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "createdPerson",
+            "type": "publicKey"
+          },
+          {
+            "name": "createdTime",
+            "type": "i64"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "tasks",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "TopicTooLong",
+      "msg": "The provided topic should be 50 characters long maximum."
+    }
+  ],
+  "metadata": {
+    "address": "8x14ThmAmwjCCpqbBoyRTqhgaKxx4S2jv7wJEeGqc8mN"
+  }
+}
